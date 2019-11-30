@@ -8,7 +8,7 @@ class ClienteForm(Form):
     sobrenome   =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
     email       =    forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control' }))
     password    =    forms.CharField (widget=forms.PasswordInput(attrs={'class': 'form-control','type':'password' }))
-    data_nascimento = forms.DateField()
+    data_nascimento = forms.DateField(widget=forms.PasswordInput(attrs={'class': 'form-control','type':'date' }))
     cpf = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control', 'data-mask': '000.000.000-00'}))
 
     class Meta:
@@ -26,19 +26,23 @@ class EnderecoForm(Form):
         model = Endereco
 
 class EmpresaForm(Form):
-    razaoSocial =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
+    nome        =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
+    sobrenome   =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
+    email       =    forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control' }))
+    password    =    forms.CharField (widget=forms.PasswordInput(attrs={'class': 'form-control','type':'password' }))
+    
+    razao_social =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
     telefone    =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
     cnpj        =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
-
-
     class Meta:
         model = Empresa #falta colocar a importação
 
 class MotoristaForm(Form):
-    habilitacao        =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
-    placa   =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
+    nome        =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
+    sobrenome   =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
     email       =    forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control' }))
     password    =    forms.CharField (widget=forms.PasswordInput(attrs={'class': 'form-control','type':'password' }))
-
+    habilitacao =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
+    placa       =    forms.CharField (widget=forms.TextInput (attrs={'class': 'form-control' }))
     class Meta:
         model = Motorista #falta colocar a importação
