@@ -15,6 +15,7 @@ urlpatterns = [
     path('motorista/perfil/', views.motorista_perfil),
     path('motorista/coleta/',views.visualizar_coletas),
     path('motorista/coleta/pesagem/',views.pesagem_coleta),
+    path('motorista/coleta/pesagem/processa',views.processa_coleta),
 
     path('admin/perfil/',views.admin_perfil),
     path('admin/perfil/usuarios/',views.painel_usuario),

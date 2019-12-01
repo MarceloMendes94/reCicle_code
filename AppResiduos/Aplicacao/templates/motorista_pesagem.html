@@ -27,16 +27,27 @@
         <br>
         <a href="/motorista/perfil/">voltar</a>
         <h1>PESAGEM</h1>
-        <label for="inputState">Material</label>
-        <select id="inputState" class="form-control">
-            <option selected>...</option>
-            <option>PET</option>
-            <option>PP</option>
-            <option>PEAP</option>
-        </select>
-        <label> peso</label>
-        <input type='text'>
-        <button>pesar</button>
+        <form method="POST" class="post-form">{% csrf_token %}
 
+            <label for="inputState">Material</label>
+            <select id="inputState" class="form-control">
+                <option selected>...</option>
+                {% for c in residuos %}
+                    <label>{{c.label}}</label>
+                    <option>{{ c }}</option>
+                {% endfor %}
+            </select>
+
+            <label> peso</label>
+            <input type='text'>
+
+            <!--
+            Fazer uma url que passa pra view que ira:
+            Enviar de alguma forma o peso + email do cliente vinculado a coleta para o view
+            -->
+            <br><br>
+            <button type="submit" class="btn btn-success">Pesar</button> <!-- sem proposito ainda -->
+            <br><br>
+        </form>
     </body>
 </html>

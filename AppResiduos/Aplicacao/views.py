@@ -12,7 +12,6 @@ def index(request):
 
 def cadastro(request):
     return render(request, 'cadastro.html', {})
-     
 
 
 # INICIO TELAS DE CADASTRO
@@ -154,7 +153,30 @@ def visualizar_coletas(request):
 
 @login_required(login_url='/login/')
 def pesagem_coleta(request):
-    return render(request,'motorista_pesagem.html')
+    residuos = Residuo.objects.all()
+    residuosname = []
+    for residuo in residuos:
+        # print(residuo.nome_residuo)
+        residuosname.append(residuo.nome_residuo)
+    return render(request,'motorista_pesagem.html',{'residuos':residuosname})
+
+@login_required(login_url='/login/')
+def processa_coleta(request):
+    motoristas=Motorista.objects.all()
+    for motorista in motoristas:
+        if(motorista.usuario.email==request.session['email']):
+            print('achou motorista')
+            # de alguma forma receber o objeto coleta
+            # pegar o email do cliente vinculado
+            # pegar o quanto que vale a coleta (recebe pelo form)
+            clientes = Cliente.objects.all()
+            for cliente in clientes:
+                if (cliente.usuario.email == EMAIL-VINCULADO-A-COLETA):
+                    cliente.carteira.saldo = cliente.carteira.saldo + PREÇO.DA.COLETA*0.4
+                    motorista.carteira.saldo = motorista.carteira.saldo + PREÇO.DA.COLETA*0.4
+                    # destroi a coleta
+
+    return render(request,'cliente_coleta.html')
 # FIM DE TELAS DE MOTORISTA
 
 
@@ -217,9 +239,14 @@ def relatorio_cupons(request):
 
 
 #INICIO FUNÇOES QUE TRATAM SESSAO
+
+def getUser(request):
+    result = User.objects.filter(email=request.session['email'])
+    return result[0]
+
 def getNome(request):
-    result=User.objects.filter(email=request.session['email'])
-    nome=result[0].first_name
+    result= getUser(request)
+    nome=result.first_name
     return nome
 
 def typeUser(email):
