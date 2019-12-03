@@ -5,8 +5,8 @@
     <title>cadastro Cliente</title>
         {% load static %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <style>
-    </style>
+        <!-- Adicionando JQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -16,9 +16,10 @@
         <img src="/static/img/recicle.png" width="30" height="30" class="d-inline-block align-top" alt="">
         reCicle
     </a>
-
 </nav>
+
 <br>
+
 <div class="container">
     <div class="row">
         <div class="col-md-10">
@@ -26,18 +27,24 @@
                 <div class="card  shadow p-3 mb-5 bg-white rounded">
                     <h2>Cadastro de Cliente</h2>
                     <form method="POST" class="post-form">{% csrf_token %}
-                        <h5>Dados Pessoais</h5>
+                        <h5>
+                            <img src="/static/icons/user-solid.svg" width="20px" height="20px" style="margin:5px">
+                             Dados Pessoais
+                        </h5>
                         {% for c in clienteform %}
                         <label>{{c.label}}</label>
                         {{ c }}
-                        <br><br>
+                        <br>
                         {% endfor %}
                         <!-- fim de um form inicio de outro -->
-                        <h5>Dados de Localização</h5>
+                        <h5>
+                            <img src="/static/icons/home-solid.svg" width="20px" height="20px" style="margin:5px">
+                            Dados de Localização
+                        </h5>
                         {% for i in enderecoform %}
                         <label>{{i.label}}</label>
                         {{ i }}
-                        <br><br>
+                        <br>
                         {% endfor %}
                         <button type="submit" class="btn btn-success">cadastro</button>
                         <br><br>
@@ -49,6 +56,26 @@
     </div>
 
 </div>
-<br><br><br>
+<br>
+<script>
+    $("#id_cep").blur(function(){				
+        var cep = this.value.replace(/[^0-9]/, "");
+        if(cep.length != 8){
+            return false;
+        }
+        var url = "https://viacep.com.br/ws/"+cep+"/json/";
+
+        $.getJSON(url, function(dadosRetorno){
+            try{
+                $("#id_logradouro").val(dadosRetorno.logradouro);
+                $("#id_endereco").val(dadosRetorno.logradouro);
+                $("#id_bairro").val(dadosRetorno.bairro);
+                $("#id_cidade").val(dadosRetorno.localidade);
+                $("#id_estado").val(dadosRetorno.uf);
+            }catch(ex){}
+        });
+    });
+</script>
+<br>
 </body>
 </html>

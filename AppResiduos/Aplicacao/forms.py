@@ -15,11 +15,11 @@ class ClienteForm(Form):
         model = Cliente
 
 class EnderecoForm(Form):
+    cep         =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     estado      =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     cidade      =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     bairro      =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    logradouro  =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
-    cep         =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
+    logradouro  =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))    
     numero      =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     referencia  =    forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control'}))
     class Meta:
