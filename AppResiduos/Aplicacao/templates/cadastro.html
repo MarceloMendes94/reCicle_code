@@ -10,6 +10,72 @@
 </head>
 
 <body>
+	<div id="fb-root"></div>
+		<script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v5.0&appId=804347793344907&autoLogAppEvents=1"></script>
+	<script>
+		//este é chamado com os resultados da função FB.getLoginStatus().
+		function statusChangeCallback(response) {
+			console.log("statusChangeCallback');
+			console.log(response);
+			//o objeto de resposta é retornado com um campo de status que permite...
+			//...o app saber qual estado de autenticação do usuário
+			
+			if(response.status==='connected') {
+				//autenticado com o app e com o facebook
+				usuarioConectado();
+			} else if(response.status === 'not_authorized') {
+				//o usuário está logado no facebook, mas não no app
+				document.getElemenById('status').innerHTML = 'Favor, faça seu login nesse app.';
+			} else {
+				//O usuário não está logado no facebook, portanto não dá para definir se está no app
+				document.getElementById('status').innerHTML = 'Favor, faça seu login no facebook.';
+			}
+		}
+		
+		// Essa função é chamada quando alguém termina a sessão clicando no botão de login
+		function checkLoginState() {
+			FB.getLoginStatus(function(response) {
+				statusChangeCallback(response);
+			});
+		}
+		
+		window.fbAsyncInit = function() {
+		FB.init({
+			appId		: '804347793344907'
+			cookie		: true,
+			xfbml		: true,
+			version		: 'v2.1'
+		});
+		
+		FB.getLoginStatus(function(response){
+			statusChangeCallback(response);
+		}
+		
+		//carregando o assíncrono do SDK
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/en_US/sdk.js";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+		
+		
+		function usuarioConectado() {
+				FB.api('/me', function(response) {
+					$('#info').html(
+						'Nome: '+response.name +
+						'<br>username: '+response.username +
+						'<br>Link perfil: '+response.link +
+						'<br>Email: '+response.email +
+						'<br>Sexo: '+response.gender +
+						'<br>ID: '+response.id
+					);
+						
+				$('#foto').html('<img src="https://graph.facebook.com/'+response.username+'/picture" alt="'+response.name+'" />')
+				});
+			}
+	</script>	
     <nav class="navbar navbar-light bg-light" style="background-color: #ffe4b3">
         <!-- Logo -->
         <a class="navbar-brand" href="../">
@@ -35,6 +101,7 @@
                     Pessoa Fisica</a>
                 <a href="/empresa/cadastro" class="btn btn-outline-primary btn-lg btn-block">Cliente Pessoa Juridica</a>
                 <a href="/motorista/cadastro" class="btn btn-outline-primary btn-lg btn-block">Motorista</a>
+				<div class="fb-login-button" data-width="" data-size="large" data-button-type="continue_with" data-auto-logout-link="false" data-use-continue-as="false"></div>
           
         </div>
 
