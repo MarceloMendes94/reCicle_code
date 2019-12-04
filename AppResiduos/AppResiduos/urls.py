@@ -22,7 +22,7 @@ urlpatterns = [
 
 
     path('relatorio/pesagem/',views.relatorio_pesagens),
-    path('relatorio/cupom/',views.relatorio_cupons),
+    path('cupons/loja/',views.relatorio_cupons),
 
 
     path('cadastro/', views.cadastro),

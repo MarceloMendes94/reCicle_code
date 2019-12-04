@@ -6,6 +6,27 @@
         {% load static %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <style>
+        #plastico_item{
+            background-color:red;
+            border-radius: 15px 15px 0px 0px;
+        }
+        #papel_item{
+            background-color: Blue;
+            border-radius: 15px 15px 0px 0px;
+        }
+        #metal_item{
+            background-color:yellow;
+            border-radius: 15px 15px 0px 0px;
+        }
+        #vidro_item{
+            background-color:green;
+            border-radius: 15px 15px 0px 0px;
+        }
+        .trash_icon{
+            width:30px;
+            margin-top:20px;
+            border-radius: 15px 15px 0px 0px;
+        }
     </style>
 </head>
 
@@ -30,28 +51,111 @@
     <br>
 
     <div class="container">
-        <!--
-            <img src="/static/icons/user-solid.svg" width="20px" height="20px">
-            <img src="/static/icons/home-solid.svg" width="20px" height="20px"> 
-            <img src="/static/icons/arrow-circle-left-solid.svg" width="20px" height="20px"> 
-            <img src="/static/icons/wallet-solid.svg" width="20px" height="20px">
-            <img src="/static/icons/warehouse-solid.svg" width="20px" height="20px">
-        -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="txt_default">
+                    <h2>reCicle</h2>
+                    Bem vindo ao reCicle, uma iniciativa com objetivo de gerar um renda extra e destinar os residuos domésticos da melhor maneira possível.<br>
+                    Nós juntamos pessoas, moradores e motoristas: autonomos ou desempregados, vendemos os resíduos e dividimos os valores.<br>
+                    <h2>Moradores</h2>
+                    Separam o lixo e solicitam uma coleta e valor é revertido em trashcoins podendo ser trocados em cupons.<br>
+                    <h2>Motoristas</h2>
+                    Coletam lixo nas casas das pessoas, ganham uma parte do valor da venda.<br>
+                </div>
+                
+                <div id="txt_plastico">
+                    <h2>Plástico</h2>
+                    Os polimeros reciclados saõ PET garrafas de refrigerante esse polimero pode ser reusado até em 5 vezes, PP copinhos plasticos esses polimeros podem ser reciclados em até 3 vezes, PEAP esse polimero pode ser reutilizado em até 8 vezes.
+                </div>    
+                <div id="txt_papel">
+                    <h2>Papel</h2>
+                    Papel recolhido é papelão tipo 1 e 2, papel jornal, papel branco e colorido.<br>
+                </div>    
 
+                <div id="txt_metal">
+                    <h2>Metal</h2>
+                    Aluminio: pode ser aluminio limpo (sem pintura) e aluminio colorido(latinhas) eles têm preços diferentes não trabalhamos com ferro.<br>
+                </div>    
+
+                <div id="txt_vidro">
+                    <h2>Vidro</h2>
+                    Entre todos os materiais o vidro é o único 100% reciclável, vai ao forno e derretido e moldado novamente em uma cadeia infinita.
+                    <br>
+                </div>
+            </div>        
+        </div>
     </div>
 
+    <div class="container">
+        <nav class="navbar fixed-bottom">
+            <div class="col-sm-3" id='plastico_item'> 
+                <center>
+                    <img src="/static/icons/recycle-solid.svg" class="trash_icon" >
+                    <h4>plástico</h4>
+                </center>
+            </div>
+            <div class="col-sm-3" id='papel_item'>
+                <center>
+                    <img src="/static/icons/recycle-solid.svg" class="trash_icon">
+                    <h4>papel</h4>
+                </center>
+            </div>
+            <div class="col-sm-3" id='metal_item'>
+                <center>
+                    <img src="/static/icons/recycle-solid.svg" class="trash_icon">
+                    <h4>Metal</h4>
+                </center>
+            </div>
+            <div class="col-sm-3" id='vidro_item'>
+                <center>
+                    <img src="/static/icons/recycle-solid.svg" class="trash_icon">
+                    <h4>Vidro</h4>
+                </center>                
+            </div>
+        </nav>
+    </div>
 
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-            crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-            crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
-            <script type="text/javascript">
-            $('.carousel').carousel()</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#txt_plastico").hide();
+            $("#txt_papel").hide();
+            $("#txt_metal").hide();
+            $("#txt_vidro").hide();
+            $("#vidro_item").click(function(){
+                $("#txt_default").hide();
+                $("#txt_plastico").hide();
+                $("#txt_papel").hide();
+                $("#txt_metal").hide();
+                $("#txt_vidro").show();            
+            });
+
+            $("#plastico_item").click(function(){
+                $("#txt_default").hide();
+                $("#txt_plastico").show();
+                $("#txt_papel").hide();
+                $("#txt_metal").hide();
+                $("#txt_vidro").hide();
+            
+            });
+
+            $("#papel_item").click(function(){
+                $("#txt_default").hide();
+                $("#txt_plastico").hide();
+                $("#txt_papel").show();
+                $("#txt_metal").hide();
+                $("#txt_vidro").hide();
+            });
+
+            $("#metal_item").click(function(){
+                $("#txt_default").hide();
+                $("#txt_plastico").hide();
+                $("#txt_papel").hide();
+                $("#txt_metal").show();
+                $("#txt_vidro").hide();
+            });
+        });
+    </script>
 </body>
 
 </html>

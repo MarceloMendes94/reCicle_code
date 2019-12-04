@@ -82,20 +82,6 @@ def load_residuos():
     al2 = Residuo(nome_residuo='Aluminio colorido',valor_kilo=2.35)
     al2.save()
 
-def load_pesagem():
-    residuos   = Residuo.objects.all()
-    motoristas = Motorista.objects.all()
-    clientes   = Cliente.objects.all()
-    pesos       = [1.234, 2.349, 1.576, 3.112, 2.750, 2.519, 1.250]
-    #for c in clientes:
-    residuo     =random.choice(residuos)
-    motorista   =random.choice(motoristas)
-    peso        =random.choice(pesos)
-    p = Pesagem(residuo=residuo,motorista=motorista,cliente=random.choice(clientes),peso=peso,data_hora="2011-10-01 15:26")
-    print(residuo.nome_residuo)
-    print(motorista)
-    print(peso)
-
 
 
 

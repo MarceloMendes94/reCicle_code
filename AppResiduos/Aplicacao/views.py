@@ -129,6 +129,19 @@ def pedir_coleta(request):
             coleta=Coleta(cliente=cliente,aguardando=True)
             coleta.save()
     return render(request,'cliente_coleta.html')
+
+
+@login_required(login_url='/login/')
+def relatorio_cupons(request):
+    cupons=Cupom.objects.all()
+    if request.POST:
+        filtro = request.POST.get('filtro')
+        if filtro=='00':
+            cupons=Cupom.objects.all()
+        else:
+            cupons=Cupom.objects.filter(valor=int(filtro))
+        
+    return render(request,'cliente_loja_cupom.html',{'cupons':cupons})  
 # FIM DE TELAS DE Cliente
 
 
@@ -222,18 +235,6 @@ def relatorio_pesagens(request):
                 peso_aux=peso_aux+pesagens[i].peso 
             
     return render(request,'admin_rel_pesagens.html',{'pesagens':pesagens,'soma':peso_aux})
-
-@login_required(login_url='/login/')
-def relatorio_cupons(request):
-    cupons=Cupom.objects.all()
-    if request.POST:
-        filtro = request.POST.get('filtro')
-        if filtro=='00':
-            cupons=Cupom.objects.all()
-        else:
-            cupons=Cupom.objects.filter(valor=int(filtro))
-        #cupons=Cupom.objects.filter(valor=10)
-    return render(request,'admin_rel_cupom.html',{'cupons':cupons})  
 # ADMIN FIM
 
 
