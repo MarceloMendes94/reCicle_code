@@ -1,7 +1,7 @@
 from django.shortcuts               import render,redirect
 from django.contrib.auth            import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from .models                        import Carteira, User, Cliente,Motorista,Empresa, Endereco,Coleta,Cupom, EmpresaCupom, Pesagem,Residuo
+from .models                        import Carteira, User, Cliente,Motorista,Empresa, Endereco,Coleta,Cupom, EmpresaCupom, Pesagem,Residuo, TransacaoMensal, ComprovanteEntrega
 from .forms                         import ClienteForm, EnderecoForm, MotoristaForm, EmpresaForm
 from .builder                       import DiretorCliente,DiretorEmpresa,DiretorMotorista
 from django.contrib                 import messages
@@ -281,3 +281,17 @@ def permValidador(type_user,email):
     else:
         return ''      
 #FIM FUNÇOES QUE TRATAM SESSAO    
+
+def transacao_mensal(request):
+    nome = request.POST.get('nome_empresa')
+    mes = request.POST.get('mes')
+    comprovante = ComprovanteEntrega.objects.filter(mes=mes, nome_empresa=nome)
+
+    valor_total_a_pagar = 0
+    for valor in comprovante:
+        valor_total_a_pagar = valor.valor_total + valor_total_a_pagar
+
+    return render(request, 'transacao_mensal.html', {'valor_total_a_pagar': valor_total_a_pagar})
+
+def pagamento(request):
+    return render(request, 'pagamento.html')
