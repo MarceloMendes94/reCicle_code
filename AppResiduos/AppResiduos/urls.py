@@ -28,6 +28,8 @@ urlpatterns = [
     path('cadastro/', views.cadastro),
     
     path('empresa/cadastro/', views.empresa_cadastro),
+    path('empresa/perfil/', views.empresa_perfil),
+
     path('pagamento/', views.pagamento),
     path('pagamento/gerar/', views.transacao_mensal),
 ]

@@ -183,7 +183,7 @@ def processa_coleta(request):
             # pegar o email do cliente vinculado
             # pegar o quanto que vale a coleta (recebe pelo form)
             clientes = Cliente.objects.all()
-            for cliente in clientes:
+            for cliente in clientes: # NÂO FUNCIONA PORQUE NÃO SOUBEMOS PEGAR A COLETA DE UMA SELEÇÃO (Sim esses dados ali embaixo estão errados de proposito)
                 if (cliente.usuario.email == EMAIL-VINCULADO-A-COLETA):
                     cliente.carteira.saldo = cliente.carteira.saldo + PREÇO.DA.COLETA*0.4
                     motorista.carteira.saldo = motorista.carteira.saldo + PREÇO.DA.COLETA*0.4
@@ -237,6 +237,11 @@ def relatorio_pesagens(request):
     return render(request,'admin_rel_pesagens.html',{'pesagens':pesagens,'soma':peso_aux})
 # ADMIN FIM
 
+# ADMIN EMPRESA
+@login_required(login_url='/login/')
+def empresa_perfil(request):
+    nome = getNome(request)
+    return render(request, 'empresa_perfil.html', {'nome': nome})
 
 
 #INICIO FUNÇOES QUE TRATAM SESSAO
